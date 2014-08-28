@@ -53,9 +53,9 @@ ColorfulBackgroundLayer.prototype.getCSSProperty = function(endingWithSemicolon,
 	output = output + "linear-gradient(" + this.degree + "deg, hsl(" + this.hue + ", " + this.saturation + "%, " + this.lightness + "%) " + this.positionColor + "%, transparent " + this.positionTransparency + "%)";
 
 	if (endingWithSemicolon === undefined || endingWithSemicolon === false) {
-		output = output + ",\n\t";
+		output = output + ",\n\t\t";
 	} else {
-		output = output + ";\n";
+		output = output + ";\n\t";
 	}
 
 	return output;

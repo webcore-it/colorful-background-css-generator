@@ -105,7 +105,7 @@ ColorfulBackgroundGenerator.prototype.getCSS = function(keepWhitespace, noPrefix
  * @return {String}
  */
 ColorfulBackgroundGenerator.prototype.getCSSProperty = function(prefix) {
-	var propertyString = "background:\n\t";
+	var propertyString = "background:\n\t\t";
 
 	var numberOfLayers = this.getNumberOfLayers();
 
@@ -128,7 +128,7 @@ ColorfulBackgroundGenerator.prototype.getCSSProperty = function(prefix) {
  * @return {Sting}
  */
 ColorfulBackgroundGenerator.prototype.getCSSAsText = function() {
-	return ".colorful {\n" + this.getCSS(true) + "}";
+	return ".colorful {\n\t" + this.getCSS(true) + "}";
 };
 
 /**

@@ -37,6 +37,13 @@ module.exports = function(grunt) {
 			}
 		},
 		// ----------------------------------------------------------------------
+		copy: {
+			main: {
+				src: 'bin/<%= pkg.name %>.min.js',
+				dest: '../colorful-background-website/js/<%= pkg.name %>.min.js'
+			}
+		},
+		// ----------------------------------------------------------------------
 		watch: {
 			files: ['src/**/*', '!Gruntfile.js'],
 			tasks: ['default'],
@@ -46,9 +53,10 @@ module.exports = function(grunt) {
 	grunt.loadNpmTasks('grunt-contrib-jshint');
 	grunt.loadNpmTasks('grunt-contrib-concat');
 	grunt.loadNpmTasks('grunt-contrib-uglify');
+	grunt.loadNpmTasks('grunt-contrib-copy');
 	grunt.loadNpmTasks('grunt-contrib-watch');
 
 	// Default task(s).
-	grunt.registerTask('default', ['jshint', 'concat', 'uglify']);
+	grunt.registerTask('default', ['jshint', 'concat', 'uglify', 'copy']);
 
 };

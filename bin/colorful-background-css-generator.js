@@ -1,4 +1,4 @@
-/*! colorful-background-css-generator 2014-08-25 */
+/*! colorful-background-css-generator 2014-08-27 */
 /**
  * The generator class
  */
@@ -93,7 +93,7 @@ ColorfulBackgroundGenerator.prototype.getCSS = function(keepWhitespace, noPrefix
  * @return {String}
  */
 ColorfulBackgroundGenerator.prototype.getCSSProperty = function(prefix) {
-	var propertyString = "background:\n\t";
+	var propertyString = "background:\n\t\t";
 
 	var numberOfLayers = this.getNumberOfLayers();
 
@@ -116,7 +116,7 @@ ColorfulBackgroundGenerator.prototype.getCSSProperty = function(prefix) {
  * @return {Sting}
  */
 ColorfulBackgroundGenerator.prototype.getCSSAsText = function() {
-	return ".colorful {\n" + this.getCSS(true) + "}";
+	return ".colorful {\n\t" + this.getCSS(true) + "}";
 };
 
 /**
@@ -187,9 +187,9 @@ ColorfulBackgroundLayer.prototype.getCSSProperty = function(endingWithSemicolon,
 	output = output + "linear-gradient(" + this.degree + "deg, hsl(" + this.hue + ", " + this.saturation + "%, " + this.lightness + "%) " + this.positionColor + "%, transparent " + this.positionTransparency + "%)";
 
 	if (endingWithSemicolon === undefined || endingWithSemicolon === false) {
-		output = output + ",\n\t";
+		output = output + ",\n\t\t";
 	} else {
-		output = output + ";\n";
+		output = output + ";\n\t";
 	}
 
 	return output;
