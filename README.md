@@ -6,9 +6,9 @@ This is a pure javascript generator for colorful css backgrounds.
 Check this website to see the generator in action and play with the colors settings.
 
 
-Idea
+Idea 
 ----
-The idea is to have multible layers of linear css gradients in different angles. The gradiens go from color to transparent to let the other layers shine through. 
+The idea is to have multiple layers of linear css gradients in different angles. The gradients go from color to transparent to let the lower layers shine through and generate the wanted effect.
 
 
 Usage
@@ -17,11 +17,15 @@ There are two ways to use this generator. First is to use it to generate the css
 
 Another way is to add the generator (it's in the `bin` folder) to your html file and let it set the background to the element directly.
 
-
+###website.html
 ```html
-<div id="colorful"></div>
+<body>
+    <div id="colorful">This element will have the colorful background.</div>
+    <script src="js/colorful-background-css-generator.min.js" type="text/javascript"></script>
+    <script src="js/script.js" type="text/javascript"></script>
+</body>
 ```
-
+###script.js
 ```js
 // The Generator
 var generator = new ColorfulBackgroundGenerator();
@@ -43,4 +47,6 @@ generator.assignStyleToElementId("colorful");
 
 Hints
 -----
-Choose a high saturation (`80`-`100`) and a lightness between `60` and `80` to get nice colors.
+* Choose a high saturation between `80` and `100` 
+* Choose a lightness between `60` and `80`
+* The lowest (first) layer should have the `positionTransparency` at `100` and `positionColor` > `50` to make the lowest layer more colorful then the other layers
