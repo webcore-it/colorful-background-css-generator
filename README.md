@@ -1,4 +1,4 @@
-A colorful background css gradient generator
+A colorful css gradient background generator
 ============================================
 
 This is a pure javascript generator for colorful css backgrounds.
@@ -15,7 +15,7 @@ Usage
 -----
 There are two ways to use this generator. 
 
-First is to add the generator (it's in the `bin` folder) to your html file and let it set the background to the element directly.
+First is to add the generator (it's in the `dist` folder) to your html file and let it set the background to the element directly.
 
 **website.html**
 ```html
@@ -56,7 +56,7 @@ Another way is to use the generator to generate the css for the background and a
     <head></head>
     <body>
         <pre id="code"></pre>
-        <script src="https://raw.githubusercontent.com/webcore-it/colorful-background-css-generator/master/bin/colorful-background-css-generator.min.js" type="text/javascript"></script>
+        <script src="https://raw.githubusercontent.com/webcore-it/colorful-background-css-generator/master/dist/colorful-background-css-generator.min.js" type="text/javascript"></script>
         <script type="text/javascript">
             // The Generator
             var generator = new ColorfulBackgroundGenerator();
@@ -85,3 +85,28 @@ Hints
 * Choose a high saturation between `80` and `100` 
 * Choose a lightness between `60` and `80`
 * The lowest (first) layer should have the `positionTransparency` at `100` and `positionColor` > `50` to make the lowest layer more colorful then the other layers
+
+
+License
+-----
+The MIT License (MIT)
+
+Copyright (c) 2014 webcore-it
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.

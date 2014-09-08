@@ -23,7 +23,7 @@ module.exports = function(grunt) {
 			},
 			src: {
 				src: ['src/*.js'],
-				dest: 'bin/<%= pkg.name %>.js'
+				dest: 'dist/<%= pkg.name %>.js'
 			}
 		},
 		// ----------------------------------------------------------------------
@@ -32,14 +32,14 @@ module.exports = function(grunt) {
 				banner: '/*! <%= pkg.name %> <%= grunt.template.today("yyyy-mm-dd") %> */\n'
 			},
 			src: {
-				src: 'bin/<%= pkg.name %>.js',
-				dest: 'bin/<%= pkg.name %>.min.js',
+				src: 'dist/<%= pkg.name %>.js',
+				dest: 'dist/<%= pkg.name %>.min.js',
 			}
 		},
 		// ----------------------------------------------------------------------
 		copy: {
 			main: {
-				src: 'bin/<%= pkg.name %>.min.js',
+				src: 'dist/<%= pkg.name %>.min.js',
 				dest: '../colorful-background-website/js/<%= pkg.name %>.min.js'
 			}
 		},

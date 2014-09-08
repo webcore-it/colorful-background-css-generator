@@ -1,4 +1,4 @@
-/*! colorful-background-css-generator 2014-08-27 */
+/*! colorful-background-css-generator 2014-09-08 */
 /**
  * The generator class
  */
