@@ -3,7 +3,7 @@ A colorful css gradient background generator
 
 This is a pure javascript generator for colorful css backgrounds.
 
-Check this website to see the generator in action and play with the colors settings.
+Check [this website](http://www.webcore-it.com/colorful-background) to see the generator in action and play with the colors settings.
 
 
 Idea 
