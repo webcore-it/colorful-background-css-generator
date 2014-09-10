@@ -88,6 +88,20 @@ Hints
 * Choose a lightness between `60` and `80`
 * The lowest (first) layer should have the `positionTransparency` at `100` and `positionColor` > `50` to make the lowest layer more colorful then the other layers
 
+Supported Browsers
+------------------
+The only magic are css gradients. So it works with
+* Firefox 16+
+* Safari 5.1+
+* Chrome 10+
+* Internet Explorer 10+
+* Opera 12.1+
+* iOS 5.1+
+* Android 4+
+* Blackberry 10+
+* IE Mobile 10+
+
+See http://caniuse.com/#feat=css-gradients for more details on css gradients.
 
 License
 -----
