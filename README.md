@@ -11,6 +11,8 @@ Idea
 The idea is to have multiple layers of linear css gradients in different angles. The gradients go from color to transparent to let the lower layers shine through and generate the wanted effect.
 
 
+![Visualization of the idea of multiple layers](https://raw.githubusercontent.com/webcore-it/colorful-background-css-generator/master/doc/colorful-background-idea.png "Visualization of the idea of multiple layers")
+
 Usage
 -----
 There are two ways to use this generator. 
