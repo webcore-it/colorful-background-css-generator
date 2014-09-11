@@ -94,7 +94,7 @@ Hints
 -----
 * Choose a high saturation between `80` and `100` 
 * Choose a lightness between `60` and `80`
-* The lowest (first) layer should have the `positionTransparency` at `100` and `positionColor` > `50` to make the lowest layer more colorful then the other layers
+* The lowest (first added) layer should have the `positionTransparency` at `100` and `positionColor` > `50` to make the lowest layer more colorful then the other layers
 
 Supported Browsers
 ------------------

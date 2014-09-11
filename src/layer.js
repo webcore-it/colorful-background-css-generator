@@ -1,10 +1,7 @@
 /**
- * The layer defines the gradient. Layers are combined in the generator the get a colorful background.
- *
- */
-
-/**
  * The layer class.
+ *
+ * The layer defines the gradient. Layers are combined in the generator the get a colorful background.
  *
  * 
  * @param {Number} degree, default: 45°
