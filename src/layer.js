@@ -1,6 +1,4 @@
 /**
- * The layer class.
- *
  * The layer defines the gradient. Layers are combined in the generator the get a colorful background.
  *
  * 

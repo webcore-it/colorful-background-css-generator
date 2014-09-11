@@ -26,11 +26,6 @@
  * console.log(generator.getCSSAsText());
  *
  */
-
-/**
- * The generator class
- */
-
 function ColorfulBackgroundGenerator() {
 	/**
 	 * Holds all layers.
