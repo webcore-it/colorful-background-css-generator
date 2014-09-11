@@ -8,54 +8,63 @@ Check [this website](http://www.webcore-it.com/colorful-background) to see the g
 
 Idea 
 ----
-The idea is to have multiple layers of linear css gradients in different angles. The gradients go from color to transparent to let the lower layers shine through and generate the wanted effect.
+The idea is to have multiple layers of linear css gradients in different angles. The gradients go from color to transparent to let the lower layers shine through and generate the wanted effect. There is no limit in the number of layers.
 
 
 ![Visualization of the idea of multiple layers](https://raw.githubusercontent.com/webcore-it/colorful-background-css-generator/master/doc/colorful-background-idea.png "Visualization of the idea of multiple layers")
 
 Usage
 -----
-There are two ways to use this generator. 
+There are two ways to use this generator:
 
-First is to add the generator (it's in the `dist` folder) to your html file and let it set the background to the element directly.
+* Include the generator in the website
+* Use it as just as code generator
 
-**website.html**
+There are examples in the `examples` folder.
+
+###Include the generator in the website
+Add the generator (it's in the `dist` folder) to your html file and let it set the background to the element directly.
+
+**include_generator_example.html**
 ```html
 <!doctype html>
 <html lang="en">
-    <head></head>
+    <head>
+        <style type="text/css">#colorful {  height: 30em; width: 30em; padding: 1em; }</style>
+    </head>
     <body>
         <div id="colorful">This element will have the colorful background.</div>
-        <script src="js/colorful-background-css-generator.min.js" type="text/javascript"></script>
-        <script src="js/script.js" type="text/javascript"></script>
+        <script src="https://raw.githubusercontent.com/webcore-it/colorful-background-css-generator/master/dist/colorful-background-css-generator.min.js" type="text/javascript"></script>
+        <script type="text/javascript">
+            // The Generator
+            var generator = new ColorfulBackgroundGenerator();
+
+            // This adds 5 layers to the generator
+            // The parameters are: degree[0-360], 
+            //                      hue[0-360], saturation[0-100], lightness[0-100], 
+            //                      positionColor[0-100], positionTransparency[0-100]
+            // The lowest layer (at the bottom) in the css is the first added layer.
+            generator.addLayer(new ColorfulBackgroundLayer(325, 5, 95, 55, 100)); // bottom layer
+            generator.addLayer(new ColorfulBackgroundLayer(245, 75, 90, 70, 30, 80));
+            generator.addLayer(new ColorfulBackgroundLayer(155, 150, 95, 70, 10, 80));
+            generator.addLayer(new ColorfulBackgroundLayer(55, 230, 95, 65, 0, 70));
+            generator.addLayer(new ColorfulBackgroundLayer(20, 300, 90, 65, 0, 55)); // top layer
+
+            // Assign generated style to the element identified by it's id
+            generator.assignStyleToElementId("colorful");
+        </script>
     </body>
 </html> 
 ```
-**script.js**
-```js
-// The Generator
-var generator = new ColorfulBackgroundGenerator();
 
-// This adds 4 layers to the generator
-// The parameters are: degree[0-360], 
-//                      hue[0-360], saturation[0-100], lightness[0-100], 
-//                      positionColor[0-100], positionTransparency[0-100]
-// The lowest layer in the css is the first added layer.
-generator.addLayer(new ColorfulBackgroundLayer(315, 35, 95, 65, 100));
-generator.addLayer(new ColorfulBackgroundLayer(225, 140, 90, 70, 10, 80));
-generator.addLayer(new ColorfulBackgroundLayer(135, 225, 95, 70, 10, 80));
-generator.addLayer(new ColorfulBackgroundLayer(45, 340, 100, 65, 0, 70));
-
-// Assign generated style to the element identified by it's id
-generator.assignStyleToElementId("colorful");
-```
-
+###Use it as just as code generator
 Another way is to use the generator to generate the css for the background and add this generated css to your style.css. 
 
+**generate_css_example.html**
 ```html
 <!doctype html>
 <html lang="en">
-    <head></head>
+    <head>Generate the css class</head>
     <body>
         <pre id="code"></pre>
         <script src="https://raw.githubusercontent.com/webcore-it/colorful-background-css-generator/master/dist/colorful-background-css-generator.min.js" type="text/javascript"></script>
@@ -63,19 +72,18 @@ Another way is to use the generator to generate the css for the background and a
             // The Generator
             var generator = new ColorfulBackgroundGenerator();
 
-            // This adds 4 layers to the generator
+            // This adds 3 layers to the generator
             // The parameters are: degree[0-360], 
             //                      hue[0-360], saturation[0-100], lightness[0-100], 
             //                      positionColor[0-100], positionTransparency[0-100]
-            // The lowest layer in the css is the first added layer.
-            generator.addLayer(new ColorfulBackgroundLayer(315, 35, 95, 65, 100));
-            generator.addLayer(new ColorfulBackgroundLayer(225, 140, 90, 70, 10, 80));
-            generator.addLayer(new ColorfulBackgroundLayer(135, 225, 95, 70, 10, 80));
-            generator.addLayer(new ColorfulBackgroundLayer(45, 340, 100, 65, 0, 70));
+            // The lowest layer (at the bottom) in the css is the first added layer.
+            generator.addLayer(new ColorfulBackgroundLayer(50, 35, 95, 45, 100)); // bottom layer
+            generator.addLayer(new ColorfulBackgroundLayer(140, 220, 90, 70, 30, 80));
+            generator.addLayer(new ColorfulBackgroundLayer(210, 340, 90, 65, 10, 55)); // top layer
 
             // Print the css style.
             var element = document.getElementById("code");
-            code.innerHTML = generator.getCSSAsText();
+            element.innerHTML = generator.getCSSAsText();
         </script>
     </body>
 </html>
