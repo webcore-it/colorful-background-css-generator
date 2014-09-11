@@ -8,7 +8,7 @@ Check [this website](http://www.webcore-it.com/colorful-background) to see the g
 
 Idea 
 ----
-The idea is to have multiple layers of linear css gradients in different angles. The gradients go from color to transparent to let the lower layers shine through and generate the wanted effect. There is no limit in the number of layers.
+The idea is to have multiple layers of linear css gradients at different angles. The gradients go from color to transparent to let the lower layers shine through and generate the wanted effect. There is no limit in the number of layers.
 
 
 ![Visualization of the idea of multiple layers](https://raw.githubusercontent.com/webcore-it/colorful-background-css-generator/master/doc/colorful-background-idea.png "Visualization of the idea of multiple layers")
