@@ -46,7 +46,7 @@ ColorfulBackgroundLayer.prototype.getCSSProperty = function(endingWithSemicolon,
 		output = prefix;
 	}
 	var hslColor = this.hue + ", " + this.saturation + "%, " + this.lightness + "%";
-	output = output + "linear-gradient(" + this.degree + "deg, hsla(" + hslColor + ", 1) " + this.positionColor + "%, hsla(" + hslColor + ", 0) " + this.positionTransparency + "%)";
+	output = output + "linear-gradient(" + this.getDegreeForVendor(prefix) + "deg, hsla(" + hslColor + ", 1) " + this.positionColor + "%, hsla(" + hslColor + ", 0) " + this.positionTransparency + "%)";
 
 	if (endingWithSemicolon === undefined || endingWithSemicolon === false) {
 		output = output + ",\n\t\t";
@@ -55,4 +55,27 @@ ColorfulBackgroundLayer.prototype.getCSSProperty = function(endingWithSemicolon,
 	}
 
 	return output;
+};
+/**
+ * Returns the degrees for the given vendor prefix. 
+ *
+ * - Prefixed `-webkit-linear-gradient` is counting degrees counterclockwise. 0° is at the left side.
+ * - The standard `linear-gradient` is counting degrees clockwise. 0° is at the bottom side.
+ * 
+ * @param  {String} prefix
+ * @return {String}
+ */
+ColorfulBackgroundLayer.prototype.getDegreeForVendor = function(prefix) {
+	// -webkit-linear-gradient is counting degrees counterclockwise. 0° is at the left side.
+	if (prefix === "-webkit-") {
+		var convertedDegree = (360 - parseInt(this.degree)) + 90;
+		if(convertedDegree >= 360){
+			convertedDegree -= 360;
+		}
+		return convertedDegree;
+	}
+
+	// linear-gradient is counting degrees clockwise. 0° is at the bottom side.
+	// (prefix === undefined)
+	return this.degree;	
 };
