@@ -93,7 +93,7 @@ Another way is to use the generator to generate the css for the background and a
 Hints
 -----
 * Choose a high saturation between `80` and `100` 
-* Choose a lightness between `60` and `80`
+* Choose a lightness between `40` and `60`
 * The lowest (first added) layer should have the `positionTransparency` at `100` and `positionColor` > `50` to make the lowest layer more colorful then the other layers
 
 Supported Browsers
@@ -110,6 +110,21 @@ The only magic are css gradients. So it works with
 * IE Mobile 10+
 
 See http://caniuse.com/#feat=css-gradients for more details on css gradients.
+
+Lessons Learnd
+--------------
+Firefox renders transparency in gradients different than webkit. The trick is to not use `transparent` or `rgba(0,0,0,0)` but the first color with alpha transparency = 0. 
+```css
+/* This fades to gray first before fading to transparent. */
+div.gray {
+    background: linear-gradient(0deg,  hsla(0,100%,50%,1) 0%, transparent 100%);
+}
+/* This fades from color to transparent. */
+div.color {
+    background: linear-gradient(0deg,  hsla(0,100%,50%,1) 0%, hsla(0,100%,50%,0) 100%);
+}
+```
+Open [this fiddle](http://jsfiddle.net/WebCore_IT/jj8z49eb/) in Firefox to see the difference.
 
 License
 -----

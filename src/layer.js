@@ -33,7 +33,8 @@ function ColorfulBackgroundLayer(degree, hue, saturation, lightness, positionCol
 /**
  * Returns the CSS Property of this layer.
  * If endingWithSemicolon is true, this is the last layer and the returning string will end with a semicolon.
- * 
+ *
+ * Its important to use the same color with alpha transparency = 0 as transparent color to cover firefox rendering.
  * 
  * @param  {Boolean} endingWithSemicolon
  * @param  {String} prefix
@@ -44,8 +45,8 @@ ColorfulBackgroundLayer.prototype.getCSSProperty = function(endingWithSemicolon,
 	if (prefix !== undefined) {
 		output = prefix;
 	}
-
-	output = output + "linear-gradient(" + this.degree + "deg, hsl(" + this.hue + ", " + this.saturation + "%, " + this.lightness + "%) " + this.positionColor + "%, transparent " + this.positionTransparency + "%)";
+	var hslColor = this.hue + ", " + this.saturation + "%, " + this.lightness + "%";
+	output = output + "linear-gradient(" + this.degree + "deg, hsla(" + hslColor + ", 1) " + this.positionColor + "%, hsla(" + hslColor + ", 0) " + this.positionTransparency + "%)";
 
 	if (endingWithSemicolon === undefined || endingWithSemicolon === false) {
 		output = output + ",\n\t\t";
