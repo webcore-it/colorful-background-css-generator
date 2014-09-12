@@ -111,7 +111,7 @@ The only magic are css gradients. So it works with
 
 See http://caniuse.com/#feat=css-gradients for more details on css gradients.
 
-Lessons Learnd
+Lessons Learned
 --------------
 ###Transparency in Firefox
 Firefox renders transparency in gradients different than webkit. The trick is to not use `transparent` or `rgba(0,0,0,0)` but the first color with alpha transparency = 0. 
