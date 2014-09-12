@@ -1,8 +1,4 @@
-/*! colorful-background-css-generator 2014-09-08 */
-/**
- * The generator class
- */
-
+/*! colorful-background-css-generator 2014-09-12 */
 function ColorfulBackgroundGenerator() {
 	/**
 	 * Holds all layers.
@@ -137,17 +133,6 @@ ColorfulBackgroundGenerator.prototype.assignStyleToElementId = function(elementI
 ColorfulBackgroundGenerator.prototype.assignStyleToElement = function(element) {
 	element.setAttribute("style", this.getCSS());
 };
-/**
- * The layer class.
- *
- * 
- * @param {Number} degree, default: 45°
- * @param {Number} hue, default: 200
- * @param {Number} saturation, default: 100
- * @param {Number} lightness, default: 70
- * @param {Number} positionColor, default: 0
- * @param {Number} positionTransparency, default: 70
- */
 function ColorfulBackgroundLayer(degree, hue, saturation, lightness, positionColor, positionTransparency) {
 	if(degree === undefined) degree = 45;
 	this.degree = degree;
@@ -172,7 +157,8 @@ function ColorfulBackgroundLayer(degree, hue, saturation, lightness, positionCol
 /**
  * Returns the CSS Property of this layer.
  * If endingWithSemicolon is true, this is the last layer and the returning string will end with a semicolon.
- * 
+ *
+ * Its important to use the same color with alpha transparency = 0 as transparent color to cover firefox rendering.
  * 
  * @param  {Boolean} endingWithSemicolon
  * @param  {String} prefix
@@ -183,8 +169,8 @@ ColorfulBackgroundLayer.prototype.getCSSProperty = function(endingWithSemicolon,
 	if (prefix !== undefined) {
 		output = prefix;
 	}
-
-	output = output + "linear-gradient(" + this.degree + "deg, hsl(" + this.hue + ", " + this.saturation + "%, " + this.lightness + "%) " + this.positionColor + "%, transparent " + this.positionTransparency + "%)";
+	var hslColor = this.hue + ", " + this.saturation + "%, " + this.lightness + "%";
+	output = output + "linear-gradient(" + this.degree + "deg, hsla(" + hslColor + ", 1) " + this.positionColor + "%, hsla(" + hslColor + ", 0) " + this.positionTransparency + "%)";
 
 	if (endingWithSemicolon === undefined || endingWithSemicolon === false) {
 		output = output + ",\n\t\t";
