@@ -129,8 +129,10 @@ Open [this fiddle](http://jsfiddle.net/WebCore_IT/v1gnw2wc/) in Firefox16+ to se
 
 
 ###Degrees counting in webkit
-* Prefixed `-webkit-linear-gradient` is counting degrees **counterclockwise**. 0° is at the **left side**.
-* The standard `linear-gradient` is counting degrees **clockwise**. 0° is at the **bottom side**.
+* Prefixed `-webkit-linear-gradient` is counting degrees **counterclockwise**.<br>
+0° is at the **left side**.
+* The standard `linear-gradient` is counting degrees **clockwise**.<br>
+0° is at the **bottom side**.
 
 To convert the degrees of the standard linear-gradient to the -webkit-prefix degrees: (360 - standard-degrees) + 90
 
@@ -159,4 +161,4 @@ FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
 AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
 LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
-SOFTWARE.
+SOFTWARE. 
