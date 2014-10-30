@@ -1,7 +1,7 @@
 A colorful css gradient background generator
 ============================================
 
-This is a pure javascript generator for colorful css backgrounds.
+A pure javascript generator to create colorful css backgrounds.
 
 Check [this website](http://www.webcore-it.com/colorful-background) to see the generator in action and play with the colors settings.
 
@@ -17,12 +17,12 @@ Usage
 -----
 There are two ways to use this generator:
 
-* Include the generator in the website
-* Use it as just as code generator
+1. Include the generator in the website
+2. Use it just as a code generator
 
 There are examples in the `examples` folder.
 
-###Include the generator in the website
+###1. Include the generator in the website
 Add the generator (it's in the `dist` folder) to your html file and let it set the background to the element directly.
 
 **include_generator_example.html**
@@ -57,7 +57,7 @@ Add the generator (it's in the `dist` folder) to your html file and let it set t
 </html> 
 ```
 
-###Use it as just as code generator
+###2. Use it as just as code generator
 Another way is to use the generator to generate the css for the background and add this generated css to your style.css. 
 
 **generate_css_example.html**
@@ -125,7 +125,7 @@ div.color {
     background: linear-gradient(0deg,  hsla(0,100%,50%,1) 0%, hsla(0,100%,50%,0) 100%);
 }
 ```
-Open [this fiddle](http://jsfiddle.net/WebCore_IT/jj8z49eb/) in Firefox16+ to see the difference.
+Open [this fiddle](http://jsfiddle.net/WebCore_IT/v1gnw2wc/) in Firefox16+ to see the difference.
 
 
 ###Degrees counting in webkit
