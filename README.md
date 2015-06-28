@@ -57,7 +57,7 @@ Add the generator (it's in the `dist` folder) to your html file and let it set t
 </html> 
 ```
 
-###2. Use it as just as code generator
+###2. Use it just as code generator
 Another way is to use the generator to generate the css for the background and add this generated css to your style.css. 
 
 **generate_css_example.html**
@@ -114,6 +114,8 @@ See http://caniuse.com/#feat=css-gradients for more details on css gradients.
 Lessons Learned
 --------------
 ###Transparency in Firefox
+This is fixed in Firefox 36+ but an issue in earlier versions.
+
 Firefox renders transparency in gradients different than webkit. The trick is to not use `transparent` or `rgba(0,0,0,0)` but the first color with alpha transparency = 0. 
 ```css
 /* This fades to gray first before fading to transparent. */
@@ -125,7 +127,7 @@ div.color {
     background: linear-gradient(0deg,  hsla(0,100%,50%,1) 0%, hsla(0,100%,50%,0) 100%);
 }
 ```
-Open [this fiddle](http://jsfiddle.net/WebCore_IT/v1gnw2wc/) in Firefox16+ to see the difference.
+Open [this fiddle](http://jsfiddle.net/WebCore_IT/v1gnw2wc/) with Firefox version 16 till 35 to see the difference.
 
 
 ###Degrees counting in webkit
