@@ -14,33 +14,47 @@
  * }
  */
 function ColorfulBackgroundLayer(config) {
-  if (config !== undefined && typeof config === 'object') {
-    var hue = config.h;
-    var saturation = config.s;
-    var lightness = config.l;
-    var posColor = config.posColor;
-    var posTransparency = config.posTransparency;
-    var degree = config.degree;
+  this.degree = 45;
+  this.hue = 200;
+  this.saturation = 1.0;
+  this.lightness = 0.7;
+  this.posColor = 0;
+  this.posTransparency = 7;
+
+  if (config === undefined) {
+    return;
   }
 
-  if (degree === undefined) degree = 45;
-  this.degree = degree;
+  // Set values if they are provided.
+  if (config.degree !== undefined) {
+    this.degree = config.degree;
+  }
 
-  if (hue === undefined) hue = 200;
-  this.hue = hue;
+  if (config.h !== undefined) {
+    this.hue = config.h;
+  }
 
-  if (saturation === undefined || saturation > 1) saturation = 1;
-  this.saturation = saturation;
+  if (config.s !== undefined) {
+    this.saturation = config.s;
+  }
+  if (this.saturation > 1) {
+    this.saturation = 1;
+  }
 
-  if (lightness === undefined || lightness > 1) lightness = 0.7;
-  this.lightness = lightness;
+  if (config.l !== undefined) {
+    this.lightness = config.l;
+  }
+  if (this.lightness > 1) {
+    this.lightness = 1;
+  }
 
-  if (posColor === undefined) posColor = 0;
-  this.posColor = posColor;
+  if (config.posColor !== undefined) {
+    this.posColor = config.posColor;
+  }
 
-  if (posTransparency === undefined) posTransparency = 70;
-  this.posTransparency = posTransparency;
-
+  if (config.posTransparency !== undefined) {
+    this.posTransparency = config.posTransparency;
+  }
 }
 
 /**
