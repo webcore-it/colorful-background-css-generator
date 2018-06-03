@@ -47,11 +47,11 @@ Add the generator (it's in the `dist` folder) to your html file and let it set t
             //                     posColor[0-100], 
             //                     posTransparency[0-100]
             // The lowest layer (at the bottom) in the css is the first added layer.
-            generator.addLayer(new ColorfulBackgroundLayer({degree: 325, h: 5, s: 95, l: 55, posColor: 100})); // bottom layer
-            generator.addLayer(new ColorfulBackgroundLayer({degree: 225, h: 75, s: 90, l: 70, posColor: 30, posTransparency: 80}));
-            generator.addLayer(new ColorfulBackgroundLayer({degree: 155, h: 150, s: 95, l: 70, posColor: 10, posTransparency: 80}));
-            generator.addLayer(new ColorfulBackgroundLayer({degree: 55, h: 230, s: 95, l: 65, posColor: 0, posTransparency: 70}));
-            generator.addLayer(new ColorfulBackgroundLayer({degree: 20, h: 300, s: 90, l: 65, posColor: 0, posTransparency: 55})); // top layer
+            generator.addLayer(new ColorfulBackgroundLayer({degree: 325, h: 5, s: 0.95, l: 0.55,posColor: 100})); // bottom layer
+            generator.addLayer(new ColorfulBackgroundLayer({degree: 225, h: 75, s: 0.9, l: 0.7, posColor: 30, posTransparency: 80}));
+            generator.addLayer(new ColorfulBackgroundLayer({degree: 155, h: 150, s: 0.95, l: 0.7, posColor: 10, posTransparency: 80}));
+            generator.addLayer(new ColorfulBackgroundLayer({degree: 55, h: 230, s: 0.95, l: 0.65, posColor: 0, posTransparency: 70}));
+            generator.addLayer(new ColorfulBackgroundLayer({degree: 20, h: 300, s: 0.9, l: 0.65, posColor: 0, posTransparency: 55})); // top layer
 
             // Assign generated style to the element identified by it's id
             generator.assignStyleToElementId("colorful");
@@ -83,9 +83,9 @@ Another way is to use the generator to generate the css for the background and a
             //                     posColor[0-100], 
             //                     posTransparency[0-100]
             // The lowest layer (at the bottom) in the css is the first added layer.
-            generator.addLayer(new ColorfulBackgroundLayer({degree: 50, h: 35, s: 95, l: 45, posColor: 100})); // bottom layer
-            generator.addLayer(new ColorfulBackgroundLayer({degree: 140, h: 220, s: 90, l: 70, posColor: 30, posTransparency: 80}));
-            generator.addLayer(new ColorfulBackgroundLayer({degree: 210, h: 340, s: 90, l: 65, posColor: 10, posTransparency: 55})); // top layer
+            generator.addLayer(new ColorfulBackgroundLayer({degree: 50, h: 35, s: 0.95, l: 45, posColor: 100})); // bottom layer
+            generator.addLayer(new ColorfulBackgroundLayer({degree: 140, h: 220, s: 0.9, l: 0.7, posColor: 30, posTransparency: 80}));
+            generator.addLayer(new ColorfulBackgroundLayer({degree: 210, h: 340, s: 0.9, l: 0.65, posColor: 10, posTransparency: 55})); // top layer
 
             // Print the css style.
             var element = document.getElementById("code");

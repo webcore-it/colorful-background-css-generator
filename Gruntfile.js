@@ -46,10 +46,27 @@ module.exports = function (grunt) {
 				stripBanners: true
 			},
 			src: {
-				src: ['src/*.js'],
+				src: [
+				  'src/generator.js',
+				  'src/layer.js'
+        ],
 				dest: 'dist/<%= pkg.name %>.js'
 			}
 		},
+		// ----------------------------------------------------------------------
+    strip_code: {
+      options: {
+        blocks: [
+          {
+            start_block: "/* npm-module-code */",
+            end_block: "/* end-npm-module-code */"
+          }
+        ]
+      },
+      your_target: {
+        src: 'dist/<%= pkg.name %>.js'
+      }
+    },
 		// ----------------------------------------------------------------------
 		uglify: {
 			options: {
@@ -101,11 +118,12 @@ module.exports = function (grunt) {
 
 	grunt.loadNpmTasks('grunt-contrib-jshint');
 	grunt.loadNpmTasks('grunt-contrib-concat');
+	grunt.loadNpmTasks('grunt-strip-code');
 	grunt.loadNpmTasks('grunt-contrib-uglify');
 	grunt.loadNpmTasks('grunt-contrib-copy');
 	grunt.loadNpmTasks('grunt-contrib-watch');
 
 	// Default task(s).
-	grunt.registerTask('default', ['jshint', 'concat', 'uglify', 'copy']);
+	grunt.registerTask('default', ['jshint', 'concat', 'strip_code', 'uglify', 'copy']);
 
 };

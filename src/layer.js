@@ -121,4 +121,6 @@ ColorfulBackgroundLayer.prototype.getDegreeForVendor = function (prefix) {
   return this.degree;
 };
 
+/* npm-module-code */
 module.exports = ColorfulBackgroundLayer;
+/* end-npm-module-code */

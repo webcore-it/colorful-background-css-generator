@@ -39,6 +39,7 @@
     "grunt-contrib-jshint": "~1.1.0",
     "grunt-contrib-uglify": "~3.3.0",
     "grunt-contrib-watch": "~1.1.0",
+    "grunt-strip-code": "^1.0.6",
     "jest": "^23.1.0"
   }
 }
