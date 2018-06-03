@@ -40,15 +40,18 @@ Add the generator (it's in the `dist` folder) to your html file and let it set t
             var generator = new ColorfulBackgroundGenerator();
 
             // This adds 5 layers to the generator
-            // The parameters are: degree[0-360], 
-            //                      hue[0-360], saturation[0-100], lightness[0-100], 
-            //                      positionColor[0-100], positionTransparency[0-100]
+            // The parameters are: degree[0-360],
+            //                     h[0-360], 
+            //                     s[0-1], 
+            //                     l[0-1],
+            //                     posColor[0-100], 
+            //                     posTransparency[0-100]
             // The lowest layer (at the bottom) in the css is the first added layer.
-            generator.addLayer(new ColorfulBackgroundLayer(325, 5, 95, 55, 100)); // bottom layer
-            generator.addLayer(new ColorfulBackgroundLayer(245, 75, 90, 70, 30, 80));
-            generator.addLayer(new ColorfulBackgroundLayer(155, 150, 95, 70, 10, 80));
-            generator.addLayer(new ColorfulBackgroundLayer(55, 230, 95, 65, 0, 70));
-            generator.addLayer(new ColorfulBackgroundLayer(20, 300, 90, 65, 0, 55)); // top layer
+            generator.addLayer(new ColorfulBackgroundLayer({degree: 325, h: 5, s: 95, l: 55, posColor: 100})); // bottom layer
+            generator.addLayer(new ColorfulBackgroundLayer({degree: 225, h: 75, s: 90, l: 70, posColor: 30, posTransparency: 80}));
+            generator.addLayer(new ColorfulBackgroundLayer({degree: 155, h: 150, s: 95, l: 70, posColor: 10, posTransparency: 80}));
+            generator.addLayer(new ColorfulBackgroundLayer({degree: 55, h: 230, s: 95, l: 65, posColor: 0, posTransparency: 70}));
+            generator.addLayer(new ColorfulBackgroundLayer({degree: 20, h: 300, s: 90, l: 65, posColor: 0, posTransparency: 55})); // top layer
 
             // Assign generated style to the element identified by it's id
             generator.assignStyleToElementId("colorful");
@@ -73,13 +76,16 @@ Another way is to use the generator to generate the css for the background and a
             var generator = new ColorfulBackgroundGenerator();
 
             // This adds 3 layers to the generator
-            // The parameters are: degree[0-360], 
-            //                      hue[0-360], saturation[0-100], lightness[0-100], 
-            //                      positionColor[0-100], positionTransparency[0-100]
+            // The parameters are: degree[0-360],
+            //                     h[0-360], 
+            //                     s[0-1], 
+            //                     l[0-1],
+            //                     posColor[0-100], 
+            //                     posTransparency[0-100]
             // The lowest layer (at the bottom) in the css is the first added layer.
-            generator.addLayer(new ColorfulBackgroundLayer(50, 35, 95, 45, 100)); // bottom layer
-            generator.addLayer(new ColorfulBackgroundLayer(140, 220, 90, 70, 30, 80));
-            generator.addLayer(new ColorfulBackgroundLayer(210, 340, 90, 65, 10, 55)); // top layer
+            generator.addLayer(new ColorfulBackgroundLayer({degree: 50, h: 35, s: 95, l: 45, posColor: 100})); // bottom layer
+            generator.addLayer(new ColorfulBackgroundLayer({degree: 140, h: 220, s: 90, l: 70, posColor: 30, posTransparency: 80}));
+            generator.addLayer(new ColorfulBackgroundLayer({degree: 210, h: 340, s: 90, l: 65, posColor: 10, posTransparency: 55})); // top layer
 
             // Print the css style.
             var element = document.getElementById("code");
@@ -94,7 +100,7 @@ Hints
 -----
 * Choose a high saturation between `80` and `100` 
 * Choose a lightness between `40` and `60`
-* The lowest (first added) layer should have the `positionTransparency` at `100` and `positionColor` > `50` to make the lowest layer more colorful then the other layers
+* The lowest (first added) layer should have the `posTransparency` at `100` and `posColor` > `50` to make the lowest layer more colorful then the other layers
 
 Supported Browsers
 ------------------

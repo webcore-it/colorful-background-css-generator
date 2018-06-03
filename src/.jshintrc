@@ -1,3 +1,6 @@
 {
-    "evil": true
+    "evil": true,
+    "strict": true,
+    "browser": true,
+    "node": true
 }

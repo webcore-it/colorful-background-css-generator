@@ -1,3 +1,4 @@
+"use strict";
 /**
  * The Generator contains the layers used to generate the style.
  *
@@ -9,19 +10,22 @@
  * var generator = new ColorfulBackgroundGenerator();
  *
  * // This adds 5 layers to the generator
- * // The parameters are: degree[0-360], 
- * //                      hue[0-360], saturation[0-100], lightness[0-100], 
- * //                      positionColor[0-100], positionTransparency[0-100]
+ * // The parameters are: degree[0-360],
+ * //                     h[0-360],
+ * //                     s[0-1],
+ * //                     l[0-1],
+ * //                     posColor[0-100],
+ * //                     posTransparency[0-100]
  * // The lowest layer (at the bottom) in the css is the first added layer.
- * generator.addLayer(new ColorfulBackgroundLayer(325, 5, 95, 55, 100)); // bottom layer
- * generator.addLayer(new ColorfulBackgroundLayer(245, 75, 90, 70, 30, 80));
- * generator.addLayer(new ColorfulBackgroundLayer(155, 150, 95, 70, 10, 80));
- * generator.addLayer(new ColorfulBackgroundLayer(55, 230, 95, 65, 0, 70));
- * generator.addLayer(new ColorfulBackgroundLayer(20, 300, 90, 65, 0, 55)); // top layer
+ * generator.addLayer(new ColorfulBackgroundLayer({degree: 325, h: 5, s: 95, l: 55, posColor: 100})); // bottom layer
+ * generator.addLayer(new ColorfulBackgroundLayer({degree: 225, h: 75, s: 90, l: 70, posColor: 30, posTransparency: 80}));
+ * generator.addLayer(new ColorfulBackgroundLayer({degree: 155, h: 150, s: 95, l: 70, posColor: 10, posTransparency: 80}));
+ * generator.addLayer(new ColorfulBackgroundLayer({degree: 55, h: 230, s: 95, l: 65, posColor: 0, posTransparency: 70}));
+ * generator.addLayer(new ColorfulBackgroundLayer({degree: 20, h: 300, s: 90, l: 65, posColor: 0, posTransparency: 55})); // top layer
  *
  * // Assign generated style to the element identified by it's id
  * generator.assignStyleToElementId("id-of-the-element");
- * 
+ *
  * // Or just get the cenerated css code
  * console.log(generator.getCSSAsText());
  *
@@ -40,7 +44,7 @@ function ColorfulBackgroundGenerator() {
  * @return {Number}
  */
 ColorfulBackgroundGenerator.prototype.getNumberOfLayers = function() {
-	return this.layers.length;
+  return this.layers.length;
 };
 
 /**
@@ -80,13 +84,21 @@ ColorfulBackgroundGenerator.prototype.addLayer = function(layer, position) {
  * @param  {Number} layerIndex
  */
 ColorfulBackgroundGenerator.prototype.deleteLayer = function(layerIndex) {
-	this.layers.splice(layerIndex, 1);
+  this.layers.splice(layerIndex, 1);
+};
+
+/**
+ * Removes all layers.
+ *
+ */
+ColorfulBackgroundGenerator.prototype.deleteAllLayers = function() {
+  this.layers = [];
 };
 
 /**
  * Returns the CSS for the current background as a CSS property.
  *
- * 
+ *
  *
  * @param  {Boolean} keepWhitespace
  * @return {String}
@@ -98,8 +110,8 @@ ColorfulBackgroundGenerator.prototype.getCSS = function(keepWhitespace, noPrefix
 
 	if(noPrefixes === undefined || noPrefixes === false) {
 		output = this.getCSSProperty("-webkit-") + output;
-	} 
-	
+	}
+
 
 	if (keepWhitespace === undefined || keepWhitespace === false) {
 		return output.trim();
@@ -109,14 +121,14 @@ ColorfulBackgroundGenerator.prototype.getCSS = function(keepWhitespace, noPrefix
 
 
 /**
- * Returns the CSS property for all layers for a given css prefix. 
+ * Returns the CSS property for all layers for a given css prefix.
  * If no prefix is given, the result will be the default W3C format.
- * 
+ *
  * @param  {String} prefix
  * @return {String}
  */
 ColorfulBackgroundGenerator.prototype.getCSSProperty = function(prefix) {
-	var propertyString = "background:\n\t\t";
+	var propertyString = "background:\n    ";
 
 	var numberOfLayers = this.getNumberOfLayers();
 
@@ -129,7 +141,7 @@ ColorfulBackgroundGenerator.prototype.getCSSProperty = function(prefix) {
 			propertyString += this.layers[i].getCSSProperty(false, prefix);
 		}
 	}
-	
+
 	return propertyString;
 };
 
@@ -139,7 +151,7 @@ ColorfulBackgroundGenerator.prototype.getCSSProperty = function(prefix) {
  * @return {Sting}
  */
 ColorfulBackgroundGenerator.prototype.getCSSAsText = function() {
-	return ".colorful {\n\t" + this.getCSS(true) + "}";
+	return ".colorful {\n  " + this.getCSS(true) + "}";
 };
 
 /**
@@ -160,3 +172,6 @@ ColorfulBackgroundGenerator.prototype.assignStyleToElementId = function(elementI
 ColorfulBackgroundGenerator.prototype.assignStyleToElement = function(element) {
 	element.setAttribute("style", this.getCSS());
 };
+
+
+module.exports = ColorfulBackgroundGenerator;
