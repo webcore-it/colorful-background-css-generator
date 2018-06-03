@@ -1,4 +1,4 @@
-/*! colorful-background-css-generator | build at 2015-02-05 */
+/*! colorful-background-css-generator | build at 2018-06-03 */
 
 /*! 
 The MIT License (MIT) 
@@ -24,6 +24,38 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE. 
 */ 
 
+"use strict";
+/**
+ * The Generator contains the layers used to generate the style.
+ *
+ * The lowest layer (at the bottom) in the css is the first added layer.
+ *
+ *
+ * Usage:
+ * // Frist create a new generator
+ * var generator = new ColorfulBackgroundGenerator();
+ *
+ * // This adds 5 layers to the generator
+ * // The parameters are: degree[0-360],
+ * //                     h[0-360],
+ * //                     s[0-1],
+ * //                     l[0-1],
+ * //                     posColor[0-100],
+ * //                     posTransparency[0-100]
+ * // The lowest layer (at the bottom) in the css is the first added layer.
+ * generator.addLayer(new ColorfulBackgroundLayer({degree: 325, h: 5, s: 95, l: 55, posColor: 100})); // bottom layer
+ * generator.addLayer(new ColorfulBackgroundLayer({degree: 225, h: 75, s: 90, l: 70, posColor: 30, posTransparency: 80}));
+ * generator.addLayer(new ColorfulBackgroundLayer({degree: 155, h: 150, s: 95, l: 70, posColor: 10, posTransparency: 80}));
+ * generator.addLayer(new ColorfulBackgroundLayer({degree: 55, h: 230, s: 95, l: 65, posColor: 0, posTransparency: 70}));
+ * generator.addLayer(new ColorfulBackgroundLayer({degree: 20, h: 300, s: 90, l: 65, posColor: 0, posTransparency: 55})); // top layer
+ *
+ * // Assign generated style to the element identified by it's id
+ * generator.assignStyleToElementId("id-of-the-element");
+ *
+ * // Or just get the cenerated css code
+ * console.log(generator.getCSSAsText());
+ *
+ */
 function ColorfulBackgroundGenerator() {
 	/**
 	 * Holds all layers.
@@ -38,7 +70,7 @@ function ColorfulBackgroundGenerator() {
  * @return {Number}
  */
 ColorfulBackgroundGenerator.prototype.getNumberOfLayers = function() {
-	return this.layers.length;
+  return this.layers.length;
 };
 
 /**
@@ -78,13 +110,21 @@ ColorfulBackgroundGenerator.prototype.addLayer = function(layer, position) {
  * @param  {Number} layerIndex
  */
 ColorfulBackgroundGenerator.prototype.deleteLayer = function(layerIndex) {
-	this.layers.splice(layerIndex, 1);
+  this.layers.splice(layerIndex, 1);
+};
+
+/**
+ * Removes all layers.
+ *
+ */
+ColorfulBackgroundGenerator.prototype.deleteAllLayers = function() {
+  this.layers = [];
 };
 
 /**
  * Returns the CSS for the current background as a CSS property.
  *
- * 
+ *
  *
  * @param  {Boolean} keepWhitespace
  * @return {String}
@@ -96,8 +136,8 @@ ColorfulBackgroundGenerator.prototype.getCSS = function(keepWhitespace, noPrefix
 
 	if(noPrefixes === undefined || noPrefixes === false) {
 		output = this.getCSSProperty("-webkit-") + output;
-	} 
-	
+	}
+
 
 	if (keepWhitespace === undefined || keepWhitespace === false) {
 		return output.trim();
@@ -107,14 +147,14 @@ ColorfulBackgroundGenerator.prototype.getCSS = function(keepWhitespace, noPrefix
 
 
 /**
- * Returns the CSS property for all layers for a given css prefix. 
+ * Returns the CSS property for all layers for a given css prefix.
  * If no prefix is given, the result will be the default W3C format.
- * 
+ *
  * @param  {String} prefix
  * @return {String}
  */
 ColorfulBackgroundGenerator.prototype.getCSSProperty = function(prefix) {
-	var propertyString = "background:\n\t\t";
+	var propertyString = "background:\n    ";
 
 	var numberOfLayers = this.getNumberOfLayers();
 
@@ -127,7 +167,7 @@ ColorfulBackgroundGenerator.prototype.getCSSProperty = function(prefix) {
 			propertyString += this.layers[i].getCSSProperty(false, prefix);
 		}
 	}
-	
+
 	return propertyString;
 };
 
@@ -137,7 +177,7 @@ ColorfulBackgroundGenerator.prototype.getCSSProperty = function(prefix) {
  * @return {Sting}
  */
 ColorfulBackgroundGenerator.prototype.getCSSAsText = function() {
-	return ".colorful {\n\t" + this.getCSS(true) + "}";
+	return ".colorful {\n  " + this.getCSS(true) + "}";
 };
 
 /**
@@ -158,25 +198,86 @@ ColorfulBackgroundGenerator.prototype.assignStyleToElementId = function(elementI
 ColorfulBackgroundGenerator.prototype.assignStyleToElement = function(element) {
 	element.setAttribute("style", this.getCSS());
 };
-function ColorfulBackgroundLayer(degree, hue, saturation, lightness, positionColor, positionTransparency) {
-	if(degree === undefined) degree = 45;
-	this.degree = degree;
 
-	if(hue === undefined) hue = 200;
-	this.hue = hue;
 
-	if(saturation === undefined) saturation = 100;
-	this.saturation = saturation;
+module.exports = ColorfulBackgroundGenerator;
 
-	if(lightness === undefined) lightness = 70;
-	this.lightness = lightness;
+"use strict";
 
-	if(positionColor === undefined) positionColor = 0;
-	this.positionColor = positionColor;
+var ColorfulBackgroundGenerator = require('./generator');
+var ColorfulBackgroundLayer = require('./layer');
 
-	if(positionTransparency === undefined) positionTransparency = 70;
-	this.positionTransparency = positionTransparency;
+module.exports = {
+  ColorfulBackgroundGenerator: ColorfulBackgroundGenerator,
+  ColorfulBackgroundLayer: ColorfulBackgroundLayer
+};
+'use strict';
 
+/**
+ * The layer defines the gradient. Layers are combined in the generator the get a colorful background.
+ *
+ *
+ * @param {Object} config, default: {
+ *  degree: 45
+ *  hue: 200
+ *  saturation: 1.0
+ *  lightness: 0.7
+ *  posColor: 0
+ *  posTransparency: 70
+ * }
+ */
+function ColorfulBackgroundLayer(config) {
+  this.degree = 45;
+  this.hue = 200;
+  this.saturation = 1.0;
+  this.lightness = 0.7;
+  this.posColor = 0;
+  this.posTransparency = 7;
+
+  if (config === undefined) {
+    return;
+  }
+
+  // Set values if they are provided.
+  if (config.degree !== undefined) {
+    this.degree = config.degree;
+  }
+
+  if (config.h !== undefined) {
+    this.hue = config.h;
+  }
+
+  if (config.s !== undefined) {
+    this.saturation = config.s;
+  }
+  if (this.saturation > 1) {
+    this.saturation = 1;
+  }
+
+  if (config.l !== undefined) {
+    this.lightness = config.l;
+  }
+  if (this.lightness > 1) {
+    this.lightness = 1;
+  }
+
+  if (config.posColor !== undefined) {
+    this.posColor = config.posColor;
+  }
+
+  if (config.posTransparency !== undefined) {
+    this.posTransparency = config.posTransparency;
+  }
+}
+
+/**
+ * Round to 2 digits.
+ *
+ * @param num
+ * @returns {number}
+ */
+function roundToTwo(num) {
+  return +(Math.round(num + 'e+2') + 'e-2');
 }
 
 /**
@@ -184,47 +285,53 @@ function ColorfulBackgroundLayer(degree, hue, saturation, lightness, positionCol
  * If endingWithSemicolon is true, this is the last layer and the returning string will end with a semicolon.
  *
  * Its important to use the same color with alpha transparency = 0 as transparent color to cover firefox rendering.
- * 
+ *
  * @param  {Boolean} endingWithSemicolon
  * @param  {String} prefix
  * @return {String}
  */
-ColorfulBackgroundLayer.prototype.getCSSProperty = function(endingWithSemicolon, prefix) {
-	var output = "";
-	if (prefix !== undefined) {
-		output = prefix;
-	}
-	var hslColor = this.hue + ", " + this.saturation + "%, " + this.lightness + "%";
-	output = output + "linear-gradient(" + this.getDegreeForVendor(prefix) + "deg, hsla(" + hslColor + ", 1) " + this.positionColor + "%, hsla(" + hslColor + ", 0) " + this.positionTransparency + "%)";
+ColorfulBackgroundLayer.prototype.getCSSProperty = function (endingWithSemicolon, prefix) {
+  var output = '';
+  if (prefix !== undefined) {
+    output = prefix;
+  }
 
-	if (endingWithSemicolon === undefined || endingWithSemicolon === false) {
-		output = output + ",\n\t\t";
-	} else {
-		output = output + ";\n\t";
-	}
+  var saturation = this.saturation * 100;
+  var lightness = this.lightness * 100;
 
-	return output;
+  var hslColor = roundToTwo(this.hue) + ', ' + roundToTwo(saturation) + '%, ' + roundToTwo(lightness) + '%';
+  output = output + 'linear-gradient(' + this.getDegreeForVendor(prefix) + 'deg, hsla(' + hslColor + ', 1) ' + this.posColor + '%, hsla(' + hslColor + ', 0) ' + this.posTransparency + '%)';
+
+  if (endingWithSemicolon === undefined || endingWithSemicolon === false) {
+    output = output + ',\n    ';
+  } else {
+    output = output + ';\n  ';
+  }
+
+  return output;
 };
 /**
- * Returns the degrees for the given vendor prefix. 
+ * Returns the degrees for the given vendor prefix.
  *
  * - Prefixed `-webkit-linear-gradient` is counting degrees counterclockwise. 0° is at the left side.
  * - The standard `linear-gradient` is counting degrees clockwise. 0° is at the bottom side.
- * 
+ *
  * @param  {String} prefix
  * @return {String}
  */
-ColorfulBackgroundLayer.prototype.getDegreeForVendor = function(prefix) {
-	// -webkit-linear-gradient is counting degrees counterclockwise. 0° is at the left side.
-	if (prefix === "-webkit-") {
-		var convertedDegree = (360 - parseInt(this.degree)) + 90;
-		if(convertedDegree >= 360){
-			convertedDegree -= 360;
-		}
-		return convertedDegree;
-	}
+ColorfulBackgroundLayer.prototype.getDegreeForVendor = function (prefix) {
+  // -webkit-linear-gradient is counting degrees counterclockwise. 0° is at the left side.
+  if (prefix === '-webkit-') {
+    var convertedDegree = (360 - parseInt(this.degree)) + 90;
+    if (convertedDegree >= 360) {
+      convertedDegree -= 360;
+    }
+    return convertedDegree;
+  }
 
-	// linear-gradient is counting degrees clockwise. 0° is at the bottom side.
-	// (prefix === undefined)
-	return this.degree;	
+  // linear-gradient is counting degrees clockwise. 0° is at the bottom side.
+  // (prefix === undefined)
+  return this.degree;
 };
+
+module.exports = ColorfulBackgroundLayer;
